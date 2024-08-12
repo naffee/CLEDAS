@@ -8,8 +8,13 @@ import {
     IsString,
     IsUrl,
     Length,
+    ValidateNested
   } from 'class-validator';
+  import {Type} from 'class-transformer'
 import { ApiProperty } from '@nestjs/swagger';
+import { ArrestingStationDto } from './arrestingstation.dto';
+import { FingerPrintDto } from './fingerprint.dto';
+import { KnownAssociatesDto } from './knownassociates.dto';
 
 export class RegisterAdminDto {
     @ApiProperty()
@@ -68,141 +73,116 @@ export class LoginDto {
 export class SuspectProfileDto{
   @ApiProperty()
   @IsString()
-  @IsNotEmpty()
+  //@IsNotEmpty()
   firstname: string;
 
   @ApiProperty()
   @IsString()
-  @IsNotEmpty()
+  //@IsNotEmpty()
   middlename:string;
 
   @ApiProperty()
   @IsString()
-  @IsNotEmpty()
+  //@IsNotEmpty()
   lastname:string;
 
   @ApiProperty()
   @IsString()
-  @IsNotEmpty()
+  //@IsNotEmpty()
   alias:string;
 
   @ApiProperty()
   @IsString()
-  @IsNotEmpty()
+  //@IsNotEmpty()
   phonenumber:string;
 
   @ApiProperty()
   @IsString()
   @IsEmail()
-  @IsNotEmpty()
+  //@IsNotEmpty()
   email: string
 
   @ApiProperty()
   @IsString()
-  @IsNotEmpty()
+  //@IsNotEmpty()
   suspectstatus:string;
 
   @ApiProperty()
   @IsString()
-  @IsNotEmpty()
+  //@IsNotEmpty()
   nationality:string;
 
   @ApiProperty()
   @IsString()
-  @IsNotEmpty()
+  //@IsNotEmpty()
   stateOfOrigin: string;
 
   @ApiProperty()
   @IsString()
-  @IsNotEmpty()
+  //@IsNotEmpty()
   lga:string;
 
   @ApiProperty()
   @IsString()
-  @IsNotEmpty()
+  //@IsNotEmpty()
   religion:string;
 
   @ApiProperty()
   @IsString()
-  @IsNotEmpty()
+  //@IsNotEmpty()
   sex:string;
 
   @ApiProperty()
   @IsString()
-  @IsNotEmpty()
+  //@IsNotEmpty()
   height:string;
 
   @ApiProperty()
   @IsString()
-  @IsNotEmpty()
+  //@IsNotEmpty()
   weight:string;
 
   @ApiProperty()
   @IsString()
-  @IsNotEmpty()
+  //@IsNotEmpty()
   eyecolour:string;
 
   @ApiProperty()
   @IsString()
-  @IsNotEmpty()
+  //@IsNotEmpty()
   bvn:string;
 
   @ApiProperty()
   @IsString()
-  @IsNotEmpty()
+  //@IsNotEmpty()
   nin: string;
 
   @ApiProperty()
   @IsString()
-  @IsNotEmpty()
+  //@IsNotEmpty()
   driversLicenseNumber: string;
-}
-
-export class ArrestingStationDto{
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  nameOfStation:string;
 
   @ApiProperty()
   @IsArray()
-  @IsNotEmpty()
-  arrestingOfficers:[];
+  @Type(() => KnownAssociatesDto)
+  @IsOptional()
+  knownassociates: KnownAssociatesDto[];
 
   @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  stationHead: string;
+  @IsArray()
+  @Type(() => FingerPrintDto)
+  @IsOptional()
+  fingerprint: FingerPrintDto[];
 
   @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  policeDivision:string;
+  @Type(() => ArrestingStationDto)
+  @IsOptional()
+  arrestingstation: ArrestingStationDto;
 
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  policeCommand:string;
 
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  policeZone:string;
-}
 
-export class KnownAssociatesDto{
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  knownAssociates:string
-}
 
-export class FingerPrintDto{
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  fingerPrint:string
-  
+
 }
 
 export class UpdateSuspectProfileDto{
@@ -296,53 +276,25 @@ export class UpdateSuspectProfileDto{
   @IsString()
   @IsNotEmpty()
   driversLicenseNumber: string;
-}
-
-export class UpdateArrestingStationDto{
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  nameOfStation:string;
 
   @ApiProperty()
   @IsArray()
-  @IsNotEmpty()
-  arrestingOfficers:[];
+  @Type(() => KnownAssociatesDto)
+  @IsOptional()
+  knownassociates: KnownAssociatesDto[];
 
   @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  stationHead: string;
+  @IsArray()
+  @Type(() => FingerPrintDto)
+  @IsOptional()
+  fingerprint: FingerPrintDto[];
 
   @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  policeDivision:string;
+  @Type(() => ArrestingStationDto)
+  @IsOptional()
+  arrestingstation: ArrestingStationDto;
 
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  policeCommand:string;
 
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  policeZone:string;
-}
-
-export class UpdateKnownAssociatesDto{
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  knownAssociates:string;
-}
-
-export class UpdateFingerPrintDto{
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  fingerPrint:string;
-  
 }
 
 export class SendOtpDto {

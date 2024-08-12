@@ -1,4 +1,4 @@
-import { Column, Entity, OneToOne, ManyToMany, JoinTable,OneToMany, JoinColumn } from 'typeorm';
+import { Column, Entity, OneToOne, ManyToMany, JoinTable,OneToMany, JoinColumn,PrimaryGeneratedColumn } from 'typeorm';
 import { CustomEntity } from './custom.entity';
 import { ArrestingStationEntity } from './arrestingstation.entity';
 import { FingerPrintEntity } from './fingerprint.entity';
@@ -6,13 +6,16 @@ import { KnownAssociateEntity } from './knownassociates.entity';
 
 @Entity('SuspectProfile')
 export class SuspectProfileEntity extends CustomEntity{
-    @Column({ name: 'first_name', length: 255, nullable: false })
-    firstName: string;
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
 
-    @Column({ name: 'middle_name', length: 255, nullable: false })
+    @Column({name:'first_name', length:255, nullable:true })
+    firstName:string;
+
+    @Column({ name: 'middle_name', length: 255, nullable: true })
     middleName: string;
 
-    @Column({ name: 'last_nmae', length: 255, nullable: false })
+    @Column({ name: 'last_nmae', length: 255, nullable: true })
     lastName: string;
 
     @Column({ name: 'alias', length: 255, nullable: true })
@@ -27,7 +30,7 @@ export class SuspectProfileEntity extends CustomEntity{
     @Column({ name: 'suspect_status', length: 255, nullable: true })
     suspectStatus: string;
 
-    @Column({ name: 'nationality', length: 255, nullable: false })
+    @Column({ name: 'nationality', length: 255, nullable: true })
     nationality: string;
 
     @Column({ name: 'state_of_origin', length: 255, nullable: true })
@@ -45,7 +48,7 @@ export class SuspectProfileEntity extends CustomEntity{
     @Column({ name: 'height', length: 255, unique: true, nullable: true })
     height: string;
 
-    @Column({ name: 'weight', length: 255, unique: true, nullable: true })
+    @Column({ name: 'weight', length: 255, unique: true, nullable:true })
     weight: string;
 
     @Column({ name: 'eye_colour', length: 255, unique: true, nullable: true })
@@ -62,7 +65,7 @@ export class SuspectProfileEntity extends CustomEntity{
 
     @OneToOne( () => ArrestingStationEntity)
     @JoinColumn()
-    arrestingStation :ArrestingStationEntity;
+    arrestingStation :ArrestingStationEntity[];
 
     @OneToMany( () => FingerPrintEntity, (fingerPrint) => 
     fingerPrint.suspectprofile)
